@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="movie"
+            type="com.murat.moviedb.data.model.MovieEntity" />
+        <variable
+            name="callback"
+            type="com.murat.moviedb.movies.MovieClickCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="160dp"
+        android:layout_height="236dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="@{() -> callback.onClick(movie)}"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_mask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp">
+
+            <ImageView
+                android:id="@+id/iv_movie_poster"
+                android:layout_width="160dp"
+                android:layout_height="230dp"
+                android:scaleType="centerCrop"
+                app:url="@{movie.posterPath}"
+                tools:src="@tools:sample/avatars"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_mask"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_movie_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_mask"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_movie_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:text="@{movie.releaseDate.substring(0, 4)}"
+            app:layout_constraintTop_toTopOf="@id/view_mask"
+            app:layout_constraintBottom_toTopOf="@+id/tv_movie_name"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="1"
+            tools:text="2016"/>
+
+        <TextView
+            android:id="@+id/tv_movie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:text="@{movie.title}"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_year"
+            app:layout_constraintBottom_toBottomOf="@id/card_view"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            tools:text="THE MAN IN THE HIGH CASTLE"/>
+
+        <View
+            android:id="@+id/view_score"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:background="@drawable/bg_vote_score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_vote_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:textColor="#fff"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:text="@{String.valueOf(movie.voteAverage)}"
+            app:layout_constraintTop_toTopOf="@id/view_score"
+            app:layout_constraintBottom_toBottomOf="@id/view_score"
+            app:layout_constraintStart_toStartOf="@id/view_score"
+            app:layout_constraintEnd_toEndOf="@id/view_score"
+            tools:text="7.7"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
