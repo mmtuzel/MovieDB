@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.murat.moviedb.MainActivity;
 import com.murat.moviedb.R;
 import com.murat.moviedb.data.model.MovieEntity;
 import com.murat.moviedb.databinding.FragmentMoviesBinding;
@@ -128,7 +129,8 @@ public class MoviesFragment extends Fragment {
     private MovieClickCallback movieClickCallback = new MovieClickCallback() {
         @Override
         public void onClick(MovieEntity movieEntity) {
-            Toast.makeText(getActivity(), movieEntity.getTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), movieEntity.getTitle(), Toast.LENGTH_SHORT).show();
+            ((MainActivity) getActivity()).openMovieDetail(movieEntity.getId());
         }
     };
 }

@@ -1,5 +1,7 @@
 package com.murat.moviedb.data.remote;
 
+import com.murat.moviedb.data.model.MovieCredit;
+import com.murat.moviedb.data.model.MovieDetail;
 import com.murat.moviedb.data.model.MovieResponse;
 import com.murat.moviedb.data.model.TvResponse;
 
@@ -30,5 +32,8 @@ public interface ApiService {
 
     // Details
     @GET("movie/{movie_id}")
-    Call<ResponseBody> getMovieDetail(@Path("movie_id") int movieId);
+    Call<MovieDetail> getMovieDetail(@Path("movie_id") int movieId);
+
+    @GET("movie/{movie_id}/casts")
+    Call<MovieCredit> getMovieCredit(@Path("movie_id") int movieId);
 }
