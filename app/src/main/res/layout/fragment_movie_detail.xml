@@ -164,9 +164,13 @@
 
         <RatingBar
             android:id="@+id/tv_movie_rating_bar"
-            android:layout_width="0dp"
+            style="@style/CustomRatingBarTheme"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            app:setRatingValue="@{movieDetail.voteAverage}"
             app:layout_constraintStart_toEndOf="@id/tv_movie_score"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintTop_toTopOf="@id/tv_movie_score"
