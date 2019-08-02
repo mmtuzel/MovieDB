@@ -156,8 +156,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:textColor="#D6182A"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@{String.valueOf(movieDetail.voteAverage)}"
+            android:textSize="12sp"
+            app:adjustTextScore="@{String.valueOf(movieDetail.voteAverage)}"
             app:layout_constraintStart_toEndOf="@id/card_view"
             app:layout_constraintBottom_toBottomOf="@id/card_view"
             tools:text="9.8"/>
