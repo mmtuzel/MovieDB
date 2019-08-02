@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.murat.moviedb.databinding.ActivityMainBinding;
 import com.murat.moviedb.detail.DetailActivity;
 import com.murat.moviedb.movies.MoviesFragment;
+import com.murat.moviedb.profile.ProfileFragment;
 import com.murat.moviedb.tv.TvFragment;
 
 import androidx.annotation.NonNull;
@@ -71,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                     case R.id.navigation_profile: {
-                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                        navigateToFragment(new ProfileFragment(), false);
                         return true;
                     }
                 }
