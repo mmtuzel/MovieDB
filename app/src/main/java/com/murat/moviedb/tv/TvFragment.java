@@ -25,7 +25,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class TvFragment extends Fragment {
-    private static final String TAG = "TvFragment";
+    public static final String TAG = "TvFragment";
 
     private FragmentTvBinding binding;
 
