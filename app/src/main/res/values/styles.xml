@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="BottomNavTheme" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/color_selector_bottom_nav</item>
         <item name="itemTextColor">@color/color_selector_bottom_nav</item>
