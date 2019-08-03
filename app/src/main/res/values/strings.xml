@@ -6,4 +6,6 @@
     <string name="navigation_movies">MOVIES</string>
     <string name="navigation_tv">TV</string>
     <string name="navigation_profile">PROFILE</string>
+
+    <string name="popular_tv_show_title">%s(%s-)</string>
 </resources>

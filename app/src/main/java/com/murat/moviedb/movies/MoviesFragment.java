@@ -34,7 +34,6 @@ import java.util.List;
 public class MoviesFragment extends Fragment {
     public static final String TAG = "MoviesFragment";
 
-    //FragmentMoviesBinding
     private FragmentMoviesBinding binding;
 
     private TopRatedMoviesAdapter topRatedMoviesAdapter;

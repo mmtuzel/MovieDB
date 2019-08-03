@@ -16,8 +16,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:onClick="@{() -> callback.onClick(tvShow)}"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp">
+        android:layout_height="210dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -47,12 +46,12 @@
             android:fontFamily="@font/roboto_bold"
             android:textSize="15sp"
             android:textAllCaps="true"
-            android:text="@{tvShow.name}"
+            android:text="@{@string/popular_tv_show_title(tvShow.name, tvShow.firstAirDate.substring(0, 4))}"
             app:layout_constraintTop_toBottomOf="@id/card_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            tools:text="Stranger Thins(2016-)"/>
+            tools:text="Stranger Things(2016-)"/>
 
         <View
             android:id="@+id/view_score"
@@ -69,9 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:textColor="#fff"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:text="@{String.valueOf(tvShow.voteAverage)}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/roboto_medium"
+            app:adjustTextScore="@{String.valueOf(tvShow.voteAverage)}"
             app:layout_constraintTop_toTopOf="@id/view_score"
             app:layout_constraintBottom_toBottomOf="@id/view_score"
             app:layout_constraintStart_toStartOf="@id/view_score"

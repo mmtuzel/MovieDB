@@ -44,7 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clipToPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_top_rated"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -68,7 +71,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clipToPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_now_playing"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -92,11 +98,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:clipToPadding="false"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_popular"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_popular_movie"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_popular"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
