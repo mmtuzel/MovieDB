@@ -10,6 +10,7 @@ import com.murat.moviedb.detail.DetailActivity;
 import com.murat.moviedb.movies.MoviesFragment;
 import com.murat.moviedb.profile.ProfileFragment;
 import com.murat.moviedb.tv.TvShowsFragment;
+import com.murat.moviedb.util.Constants;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -38,7 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMovieDetail(int movieId) {
         Intent detailIntent = new Intent(this, DetailActivity.class);
-        detailIntent.putExtra("movieId", movieId);
+        detailIntent.putExtra(Constants.MOVIE_ID, movieId);
+        detailIntent.putExtra(Constants.DETAIL_TYPE, Constants.MOVIE_DETAIL_TYPE);
+        startActivity(detailIntent);
+    }
+
+    public void openTvShowDetail(int tvShowId) {
+        Intent detailIntent = new Intent(this, DetailActivity.class);
+        detailIntent.putExtra(Constants.TV_SHOW_ID, tvShowId);
+        detailIntent.putExtra(Constants.DETAIL_TYPE, Constants.TV_SHOW_DETAIL_TYPE);
         startActivity(detailIntent);
     }
 

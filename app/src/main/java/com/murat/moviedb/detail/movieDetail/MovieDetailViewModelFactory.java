@@ -1,10 +1,8 @@
-package com.murat.moviedb.detail;
+package com.murat.moviedb.detail.movieDetail;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.murat.moviedb.movies.MovieViewModel;
 
 public class MovieDetailViewModelFactory implements ViewModelProvider.Factory {
     private int movieId;

@@ -33,7 +33,7 @@
                 android:layout_width="140dp"
                 android:layout_height="210dp"
                 android:scaleType="centerCrop"
-                app:url="@{movie.posterPath}"
+                app:mediumImageUrl="@{movie.posterPath}"
                 tools:src="@tools:sample/avatars"/>
 
         </androidx.cardview.widget.CardView>

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.murat.moviedb.MainActivity;
 import com.murat.moviedb.R;
 import com.murat.moviedb.data.model.TvShowEntity;
 import com.murat.moviedb.databinding.FragmentTvShowsBinding;
@@ -42,10 +43,10 @@ public class TvShowsFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_shows, container, false);
 
-        topRatedTvSeriesAdapter = new TopRatedTvShowsAdapter();
+        topRatedTvSeriesAdapter = new TopRatedTvShowsAdapter(tvShowClickCallback);
         binding.rvTopRated.setAdapter(topRatedTvSeriesAdapter);
 
-        popularTvSeriesAdapter = new PopularTvShowsAdapter();
+        popularTvSeriesAdapter = new PopularTvShowsAdapter(tvShowClickCallback);
         binding.rvPopular.setAdapter(popularTvSeriesAdapter);
 
         return binding.getRoot();
@@ -81,4 +82,11 @@ public class TvShowsFragment extends Fragment {
             }
         });
     }
+
+    private TvShowClickCallback tvShowClickCallback = new TvShowClickCallback() {
+        @Override
+        public void onClick(TvShowEntity tvShowEntity) {
+            ((MainActivity) getActivity()).openTvShowDetail(tvShowEntity.getId());
+        }
+    };
 }

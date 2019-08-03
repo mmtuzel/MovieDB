@@ -1,4 +1,4 @@
-package com.murat.moviedb.detail;
+package com.murat.moviedb.detail.movieDetail;
 
 
 import android.os.Bundle;
@@ -15,9 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.murat.moviedb.R;
-import com.murat.moviedb.data.model.MovieCredit;
+import com.murat.moviedb.data.model.Credits;
 import com.murat.moviedb.data.model.MovieDetail;
 import com.murat.moviedb.databinding.FragmentMovieDetailBinding;
+import com.murat.moviedb.detail.CreditsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +29,7 @@ public class MovieDetailFragment extends Fragment {
     private static final String ARG_MOVIE_ID = "movieId";
 
     private FragmentMovieDetailBinding binding;
-    private CreditAdapter creditAdapter;
+    private CreditsAdapter creditsAdapter;
 
     private int movieId;
 
@@ -61,8 +62,8 @@ public class MovieDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false);
 
-        creditAdapter = new CreditAdapter();
-        binding.rvMovieCredit.setAdapter(creditAdapter);
+        creditsAdapter = new CreditsAdapter();
+        binding.rvMovieCredits.setAdapter(creditsAdapter);
 
         return binding.getRoot();
     }
@@ -77,7 +78,7 @@ public class MovieDetailFragment extends Fragment {
         ).get(MovieDetailViewModel.class);
 
         subscribeMovieDetail(movieDetailViewModel.getMovieDetail());
-        subscribeMovieCredit(movieDetailViewModel.getMovieCredit());
+        subscribeMovieCredits(movieDetailViewModel.getMovieCredits());
     }
 
     private void subscribeMovieDetail(LiveData<MovieDetail> liveData) {
@@ -89,11 +90,11 @@ public class MovieDetailFragment extends Fragment {
         });
     }
 
-    private void subscribeMovieCredit(LiveData<MovieCredit> liveData) {
-        liveData.observe(this, new Observer<MovieCredit>() {
+    private void subscribeMovieCredits(LiveData<Credits> liveData) {
+        liveData.observe(this, new Observer<Credits>() {
             @Override
-            public void onChanged(MovieCredit movieCredit) {
-                creditAdapter.setCasts(movieCredit.getCast());
+            public void onChanged(Credits movieCredit) {
+                creditsAdapter.setCasts(movieCredit.getCast());
             }
         });
     }

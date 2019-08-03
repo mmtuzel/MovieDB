@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="movieDetail"
-            type="com.murat.moviedb.data.model.MovieDetail" />
+            name="tvShowDetail"
+            type="com.murat.moviedb.data.model.TvShowDetail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".detail.movieDetail.MovieDetailFragment">
+        tools:context=".detail.tvShowDetail.TvShowDetailFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start"
@@ -51,7 +51,7 @@
             app:layout_constraintGuide_percent="0.99"/>
 
         <ImageView
-            android:id="@+id/iv_movie_backdrop"
+            android:id="@+id/iv_tv_show_backdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="center"
@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/guideline_center"
-            app:largeImageUrl="@{movieDetail.backdropPath}"
+            app:largeImageUrl="@{tvShowDetail.backdropPath}"
             tools:src="@tools:sample/backgrounds/scenic[7]"/>
 
         <ImageView
@@ -111,17 +111,17 @@
             app:cardCornerRadius="8dp">
 
             <ImageView
-                android:id="@+id/iv_movie_poster"
+                android:id="@+id/iv_tv_show_poster"
                 android:layout_width="120dp"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                app:mediumImageUrl="@{movieDetail.posterPath}"
+                app:mediumImageUrl="@{tvShowDetail.posterPath}"
                 tools:src="@tools:sample/avatars"/>
 
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_movie_name"
+            android:id="@+id/tv_tv_show_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -129,7 +129,7 @@
             android:textColor="@color/white"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@{movieDetail.title}"
+            android:text="@{tvShowDetail.name}"
             app:layout_constraintStart_toEndOf="@id/card_view"
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintTop_toTopOf="@id/card_view"
@@ -138,28 +138,28 @@
             tools:text="@tools:sample/full_names"/>
 
         <TextView
-            android:id="@+id/tv_movie_genres"
+            android:id="@+id/tv_tv_show_genres"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:textColor="#222222"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:movieGenres="@{movieDetail.genres}"
+            app:tvShowGenres="@{tvShowDetail.genres}"
             app:layout_constraintStart_toEndOf="@id/card_view"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintTop_toBottomOf="@id/guideline_center"
             tools:text="Action, Adventure, Fantasy"/>
 
         <TextView
-            android:id="@+id/tv_movie_score"
+            android:id="@+id/tv_tv_show_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:textColor="#D6182A"
             android:textSize="12sp"
-            app:adjustTextScore="@{String.valueOf(movieDetail.voteAverage)}"
+            app:adjustTextScore="@{String.valueOf(tvShowDetail.voteAverage)}"
             app:layout_constraintStart_toEndOf="@id/card_view"
             app:layout_constraintBottom_toBottomOf="@id/card_view"
             tools:text="9.8"/>
@@ -172,14 +172,14 @@
             android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.1"
-            app:setRatingValue="@{movieDetail.voteAverage}"
-            app:layout_constraintStart_toEndOf="@id/tv_movie_score"
+            app:setRatingValue="@{tvShowDetail.voteAverage}"
+            app:layout_constraintStart_toEndOf="@id/tv_tv_show_score"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintTop_toTopOf="@id/tv_movie_score"
-            app:layout_constraintBottom_toBottomOf="@id/tv_movie_score"/>
+            app:layout_constraintTop_toTopOf="@id/tv_tv_show_score"
+            app:layout_constraintBottom_toBottomOf="@id/tv_tv_show_score"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_movie_credits"
+            android:id="@+id/rv_tv_show_credits"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -197,7 +197,7 @@
             android:background="#E0E0E0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rv_movie_credits"/>
+            app:layout_constraintBottom_toTopOf="@id/rv_tv_show_credits"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -221,13 +221,13 @@
             app:layout_constraintBottom_toTopOf="@id/view_mask_cast">
 
             <TextView
-                android:id="@+id/tv_movie_overview"
+                android:id="@+id/tv_tv_show_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#666666"
                 android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:text="@{movieDetail.overview}"
+                android:text="@{tvShowDetail.overview}"
                 tools:text="@tools:sample/lorem/random"/>
 
         </ScrollView>

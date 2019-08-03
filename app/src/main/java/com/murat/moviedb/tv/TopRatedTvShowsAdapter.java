@@ -15,8 +15,10 @@ import java.util.List;
 
 public class TopRatedTvShowsAdapter extends RecyclerView.Adapter<TopRatedTvShowsAdapter.MovieViewHolder>{
     private List<TvShowEntity> tvShow;
+    private TvShowClickCallback clickCallback;
 
-    public TopRatedTvShowsAdapter() {
+    public TopRatedTvShowsAdapter(TvShowClickCallback clickCallback) {
+        this.clickCallback = clickCallback;
     }
 
     public void setTvSeries(List<TvShowEntity> tvShow) {
@@ -31,7 +33,7 @@ public class TopRatedTvShowsAdapter extends RecyclerView.Adapter<TopRatedTvShows
                 LayoutInflater.from(parent.getContext()),
                 R.layout.item_top_rated_tv, parent, false
         );
-        //binding.setCallback(clickCallback);
+        binding.setCallback(clickCallback);
         return new MovieViewHolder(binding);
     }
 

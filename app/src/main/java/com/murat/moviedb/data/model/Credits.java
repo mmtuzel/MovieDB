@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MovieCredit {
+public class Credits {
 
     @SerializedName("id")
     @Expose

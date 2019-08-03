@@ -32,7 +32,7 @@
                 android:layout_width="80dp"
                 android:layout_height="102dp"
                 android:scaleType="centerCrop"
-                app:url="@{profilePath}"
+                app:smallImageUrl="@{profilePath}"
                 tools:src="@tools:sample/avatars"/>
 
         </androidx.cardview.widget.CardView>

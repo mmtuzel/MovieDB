@@ -1,30 +1,25 @@
-package com.murat.moviedb.detail;
+package com.murat.moviedb.detail.movieDetail;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.murat.moviedb.data.model.MovieCredit;
+import com.murat.moviedb.data.model.Credits;
 import com.murat.moviedb.data.model.MovieDetail;
 import com.murat.moviedb.data.remote.ApiClient;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailRepository {
+public class MovieDetailRepository {
     private static final String TAG = "DetailRepository";
 
     private MediatorLiveData<MovieDetail> movieDetail;
-    //private MediatorLiveData<MovieDetail> tvShowDetail;
-    private MediatorLiveData<MovieCredit> movieCredit;
+    private MediatorLiveData<Credits> movieCredit;
 
-    public DetailRepository() {
+    public MovieDetailRepository() {
         movieDetail = new MediatorLiveData<>();
-        //tvShowDetail = new MediatorLiveData<>();
         movieCredit = new MediatorLiveData<>();
     }
 
@@ -53,11 +48,11 @@ public class DetailRepository {
         return movieDetail;
     }
 
-    private void requestMovieCredit(int movieId) {
-        Call<MovieCredit> call = ApiClient.getApiService().getMovieCredit(movieId);
-        call.enqueue(new Callback<MovieCredit>() {
+    private void requestMovieCredits(int movieId) {
+        Call<Credits> call = ApiClient.getApiService().getMovieCredits(movieId);
+        call.enqueue(new Callback<Credits>() {
             @Override
-            public void onResponse(Call<MovieCredit> call, Response<MovieCredit> response) {
+            public void onResponse(Call<Credits> call, Response<Credits> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse successful");
                     movieCredit.setValue(response.body());
@@ -67,14 +62,14 @@ public class DetailRepository {
             }
 
             @Override
-            public void onFailure(Call<MovieCredit> call, Throwable t) {
+            public void onFailure(Call<Credits> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
-    public MediatorLiveData<MovieCredit> getMovieCredit(int movieId) {
-        requestMovieCredit(movieId);
+    public MediatorLiveData<Credits> getMovieCredits(int movieId) {
+        requestMovieCredits(movieId);
         return movieCredit;
     }
 }
