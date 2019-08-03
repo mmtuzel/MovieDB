@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.murat.moviedb.data.local.MovieDatabase;
 import com.murat.moviedb.data.local.dao.MovieDao;
 import com.murat.moviedb.data.model.MovieEntity;
-import com.murat.moviedb.data.model.MovieResponse;
+import com.murat.moviedb.data.model.MoviesResponse;
 import com.murat.moviedb.data.remote.ApiClient;
 
 import java.util.List;
@@ -47,10 +47,10 @@ public class MovieRepository {
     }
 
     public void insertTopRatedMovies() {
-        Call<MovieResponse> call = ApiClient.getApiService().getTopRatedMovies();
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<MoviesResponse> call = ApiClient.getApiService().getTopRatedMovies();
+        call.enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse isSuccessful");
                     //topRatedMovieDao.insertAll(response.body().getMovies());
@@ -68,17 +68,17 @@ public class MovieRepository {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
     public void insertNowPlayingMovies() {
-        Call<MovieResponse> call = ApiClient.getApiService().getNowPlayingMovies();
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<MoviesResponse> call = ApiClient.getApiService().getNowPlayingMovies();
+        call.enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse isSuccessful");
                     //topRatedMovieDao.insertAll(response.body().getMovies());
@@ -96,17 +96,17 @@ public class MovieRepository {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
     public void insertPopularMovies() {
-        Call<MovieResponse> call = ApiClient.getApiService().getPopularMovies();
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<MoviesResponse> call = ApiClient.getApiService().getPopularMovies();
+        call.enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse isSuccessful");
                     //topRatedMovieDao.insertAll(response.body().getMovies());
@@ -124,7 +124,7 @@ public class MovieRepository {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

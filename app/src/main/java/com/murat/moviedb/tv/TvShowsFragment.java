@@ -3,7 +3,6 @@ package com.murat.moviedb.tv;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -16,23 +15,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.murat.moviedb.R;
-import com.murat.moviedb.data.model.TvEntity;
-import com.murat.moviedb.databinding.FragmentTvBinding;
+import com.murat.moviedb.data.model.TvShowEntity;
+import com.murat.moviedb.databinding.FragmentTvShowsBinding;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvFragment extends Fragment {
+public class TvShowsFragment extends Fragment {
     public static final String TAG = "TvFragment";
 
-    private FragmentTvBinding binding;
+    private FragmentTvShowsBinding binding;
 
-    private TopRatedTvSeriesAdapter topRatedTvSeriesAdapter;
-    private PopularTvSeriesAdapter popularTvSeriesAdapter;
+    private TopRatedTvShowsAdapter topRatedTvSeriesAdapter;
+    private PopularTvShowsAdapter popularTvSeriesAdapter;
 
-    public TvFragment() {
+    public TvShowsFragment() {
         // Required empty public constructor
     }
 
@@ -41,12 +40,12 @@ public class TvFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tv_shows, container, false);
 
-        topRatedTvSeriesAdapter = new TopRatedTvSeriesAdapter();
+        topRatedTvSeriesAdapter = new TopRatedTvShowsAdapter();
         binding.rvTopRated.setAdapter(topRatedTvSeriesAdapter);
 
-        popularTvSeriesAdapter = new PopularTvSeriesAdapter();
+        popularTvSeriesAdapter = new PopularTvShowsAdapter();
         binding.rvPopular.setAdapter(popularTvSeriesAdapter);
 
         return binding.getRoot();
@@ -65,19 +64,19 @@ public class TvFragment extends Fragment {
         subscribePopularTvSeries(tvViewModel.getPopularTvSeries());
     }
 
-    private void subscribeTopRatedTvSeries(LiveData<List<TvEntity>> liveData) {
-        liveData.observe(this, new Observer<List<TvEntity>>() {
+    private void subscribeTopRatedTvSeries(LiveData<List<TvShowEntity>> liveData) {
+        liveData.observe(this, new Observer<List<TvShowEntity>>() {
             @Override
-            public void onChanged(List<TvEntity> tvEntities) {
+            public void onChanged(List<TvShowEntity> tvEntities) {
                 topRatedTvSeriesAdapter.setTvSeries(tvEntities);
             }
         });
     }
 
-    private void subscribePopularTvSeries(LiveData<List<TvEntity>> liveData) {
-        liveData.observe(this, new Observer<List<TvEntity>>() {
+    private void subscribePopularTvSeries(LiveData<List<TvShowEntity>> liveData) {
+        liveData.observe(this, new Observer<List<TvShowEntity>>() {
             @Override
-            public void onChanged(List<TvEntity> tvEntities) {
+            public void onChanged(List<TvShowEntity> tvEntities) {
                 popularTvSeriesAdapter.setTvSeries(tvEntities);
             }
         });

@@ -3,17 +3,14 @@ package com.murat.moviedb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.murat.moviedb.databinding.ActivityMainBinding;
 import com.murat.moviedb.detail.DetailActivity;
 import com.murat.moviedb.movies.MoviesFragment;
 import com.murat.moviedb.profile.ProfileFragment;
-import com.murat.moviedb.tv.TvFragment;
+import com.murat.moviedb.tv.TvShowsFragment;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.navigation_tv: {
                         //Toast.makeText(MainActivity.this, "TV", Toast.LENGTH_SHORT).show();
-                        navigateToFragment(new TvFragment(), false);
+                        navigateToFragment(new TvShowsFragment(), false);
                         return true;
                     }
                     case R.id.navigation_profile: {

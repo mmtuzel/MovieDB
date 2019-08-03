@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import com.murat.moviedb.data.local.MovieDatabase;
 import com.murat.moviedb.data.local.dao.TvDao;
-import com.murat.moviedb.data.model.TvEntity;
-import com.murat.moviedb.data.model.TvResponse;
+import com.murat.moviedb.data.model.TvShowEntity;
+import com.murat.moviedb.data.model.TvShowsResponse;
 import com.murat.moviedb.data.remote.ApiClient;
 
 import java.util.List;
@@ -18,38 +18,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TvRepository {
+public class TvShowRepository {
     private static final String TAG = "TvRepository";
 
     private TvDao tvDao;
-    private LiveData<List<TvEntity>> topRatedTvSeries;
-    private LiveData<List<TvEntity>> popularTvSeries;
+    private LiveData<List<TvShowEntity>> topRatedTvSeries;
+    private LiveData<List<TvShowEntity>> popularTvSeries;
 
-    public TvRepository(Application application) {
+    public TvShowRepository(Application application) {
         MovieDatabase movieDatabase = MovieDatabase.getDatabase(application);
         tvDao = movieDatabase.tvDao();
         topRatedTvSeries = tvDao.loadTopRatedTvSeries();
         popularTvSeries = tvDao.loadPopularTvSeries();
     }
 
-    public LiveData<List<TvEntity>> getTopRatedTvSeries() {
+    public LiveData<List<TvShowEntity>> getTopRatedTvSeries() {
         return topRatedTvSeries;
     }
 
-    public LiveData<List<TvEntity>> getPopularTvSeries() {
+    public LiveData<List<TvShowEntity>> getPopularTvSeries() {
         return popularTvSeries;
     }
 
     public void insertTopRatedTvSeries() {
-        Call<TvResponse> call = ApiClient.getApiService().getTopRatedTvSeries();
-        call.enqueue(new Callback<TvResponse>() {
+        Call<TvShowsResponse> call = ApiClient.getApiService().getTopRatedTvSeries();
+        call.enqueue(new Callback<TvShowsResponse>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShowsResponse> call, Response<TvShowsResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse successful");
-                    List<TvEntity> tvSeries = response.body().getResults();
-                    for (TvEntity tvShow : tvSeries) {
-                        tvShow.setTvType(0);
+                    List<TvShowEntity> tvSeries = response.body().getResults();
+                    for (TvShowEntity tvShow : tvSeries) {
+                        tvShow.setTvShowType(0);
                         Log.d(TAG, "name: " + tvShow.getName());
                     }
                     new InsertTvSeriesTask(tvDao).execute(tvSeries);
@@ -59,22 +59,22 @@ public class TvRepository {
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShowsResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
     public void insertPopularTvSeries() {
-        Call<TvResponse> call = ApiClient.getApiService().getPopularTvSeries();
-        call.enqueue(new Callback<TvResponse>() {
+        Call<TvShowsResponse> call = ApiClient.getApiService().getPopularTvSeries();
+        call.enqueue(new Callback<TvShowsResponse>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShowsResponse> call, Response<TvShowsResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse successful");
-                    List<TvEntity> tvSeries = response.body().getResults();
-                    for (TvEntity tvShow : tvSeries) {
-                        tvShow.setTvType(1);
+                    List<TvShowEntity> tvSeries = response.body().getResults();
+                    for (TvShowEntity tvShow : tvSeries) {
+                        tvShow.setTvShowType(1);
                         Log.d(TAG, "name: " + tvShow.getName());
                     }
                     new InsertTvSeriesTask(tvDao).execute(tvSeries);
@@ -84,13 +84,13 @@ public class TvRepository {
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShowsResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
-    private static class InsertTvSeriesTask extends AsyncTask<List<TvEntity>, Void, Void> {
+    private static class InsertTvSeriesTask extends AsyncTask<List<TvShowEntity>, Void, Void> {
         private TvDao dao;
 
         InsertTvSeriesTask(TvDao dao) {
@@ -98,7 +98,7 @@ public class TvRepository {
         }
 
         @Override
-        protected Void doInBackground(List<TvEntity>... lists) {
+        protected Void doInBackground(List<TvShowEntity>... lists) {
             dao.insertAll(lists[0]);
             return null;
         }

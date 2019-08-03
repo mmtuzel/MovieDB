@@ -2,12 +2,10 @@ package com.murat.moviedb.data.remote;
 
 import com.murat.moviedb.data.model.MovieCredit;
 import com.murat.moviedb.data.model.MovieDetail;
-import com.murat.moviedb.data.model.MovieResponse;
-import com.murat.moviedb.data.model.TvResponse;
+import com.murat.moviedb.data.model.MoviesResponse;
+import com.murat.moviedb.data.model.TvShowsResponse;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -15,20 +13,20 @@ public interface ApiService {
 
     // Movies
     @GET("movie/top_rated")
-    Call<MovieResponse> getTopRatedMovies();
+    Call<MoviesResponse> getTopRatedMovies();
 
     @GET("movie/now_playing")
-    Call<MovieResponse> getNowPlayingMovies();
+    Call<MoviesResponse> getNowPlayingMovies();
 
     @GET("movie/popular")
-    Call<MovieResponse> getPopularMovies();
+    Call<MoviesResponse> getPopularMovies();
 
     // TV
     @GET("tv/top_rated")
-    Call<TvResponse> getTopRatedTvSeries();
+    Call<TvShowsResponse> getTopRatedTvSeries();
 
     @GET("tv/popular")
-    Call<TvResponse> getPopularTvSeries();
+    Call<TvShowsResponse> getPopularTvSeries();
 
     // Details
     @GET("movie/{movie_id}")

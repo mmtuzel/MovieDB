@@ -6,20 +6,20 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.murat.moviedb.data.model.TvEntity;
+import com.murat.moviedb.data.model.TvShowEntity;
 
 import java.util.List;
 
 @Dao
 public interface TvDao {
 
-    @Query("SELECT * FROM tv WHERE tvType = 0")
-    LiveData<List<TvEntity>> loadTopRatedTvSeries();
+    @Query("SELECT * FROM tvShows WHERE tvShowType = 0")
+    LiveData<List<TvShowEntity>> loadTopRatedTvSeries();
 
-    @Query("SELECT * FROM tv WHERE tvType = 1")
-    LiveData<List<TvEntity>> loadPopularTvSeries();
+    @Query("SELECT * FROM tvShows WHERE tvShowType = 1")
+    LiveData<List<TvShowEntity>> loadPopularTvSeries();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<TvEntity> tv);
+    void insertAll(List<TvShowEntity> tv);
 
 }

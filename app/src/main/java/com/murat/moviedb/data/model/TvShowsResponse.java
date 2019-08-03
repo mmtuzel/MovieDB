@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TvResponse {
+public class TvShowsResponse {
 
     @SerializedName("page")
     @Expose
@@ -18,7 +18,7 @@ public class TvResponse {
     private int totalPages;
     @SerializedName("results")
     @Expose
-    private List<TvEntity> results = null;
+    private List<TvShowEntity> results = null;
 
     public int getPage() {
         return page;
@@ -44,11 +44,11 @@ public class TvResponse {
         this.totalPages = totalPages;
     }
 
-    public List<TvEntity> getResults() {
+    public List<TvShowEntity> getResults() {
         return results;
     }
 
-    public void setResults(List<TvEntity> results) {
+    public void setResults(List<TvShowEntity> results) {
         this.results = results;
     }
 }

@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Entity(tableName = "tv", primaryKeys = {"id", "tvType"})
-public class TvEntity {
+@Entity(tableName = "tvShows", primaryKeys = {"id", "tvShowType"})
+public class TvShowEntity {
 
     @SerializedName("original_name")
     @Expose
@@ -52,7 +52,7 @@ public class TvEntity {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-    private int tvType;
+    private int tvShowType;
 
     public String getOriginalName() {
         return originalName;
@@ -162,11 +162,11 @@ public class TvEntity {
         this.posterPath = posterPath;
     }
 
-    public int getTvType() {
-        return tvType;
+    public int getTvShowType() {
+        return tvShowType;
     }
 
-    public void setTvType(int tvType) {
-        this.tvType = tvType;
+    public void setTvShowType(int tvShowType) {
+        this.tvShowType = tvShowType;
     }
 }

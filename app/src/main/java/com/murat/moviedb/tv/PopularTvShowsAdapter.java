@@ -8,18 +8,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.murat.moviedb.R;
-import com.murat.moviedb.data.model.TvEntity;
-import com.murat.moviedb.databinding.ItemTopRatedTvBinding;
+import com.murat.moviedb.data.model.TvShowEntity;
+import com.murat.moviedb.databinding.ItemPopularTvBinding;
 
 import java.util.List;
 
-public class TopRatedTvSeriesAdapter extends RecyclerView.Adapter<TopRatedTvSeriesAdapter.MovieViewHolder>{
-    private List<TvEntity> tvShow;
+public class PopularTvShowsAdapter extends RecyclerView.Adapter<PopularTvShowsAdapter.MovieViewHolder>{
+    private List<TvShowEntity> tvShow;
 
-    public TopRatedTvSeriesAdapter() {
+    public PopularTvShowsAdapter() {
     }
 
-    public void setTvSeries(List<TvEntity> tvShow) {
+    public void setTvSeries(List<TvShowEntity> tvShow) {
         this.tvShow = tvShow;
         notifyDataSetChanged();
     }
@@ -27,9 +27,9 @@ public class TopRatedTvSeriesAdapter extends RecyclerView.Adapter<TopRatedTvSeri
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemTopRatedTvBinding binding = DataBindingUtil.inflate(
+        ItemPopularTvBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_top_rated_tv, parent, false
+                R.layout.item_popular_tv, parent, false
         );
         //binding.setCallback(clickCallback);
         return new MovieViewHolder(binding);
@@ -47,9 +47,9 @@ public class TopRatedTvSeriesAdapter extends RecyclerView.Adapter<TopRatedTvSeri
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        private ItemTopRatedTvBinding binding;
+        private ItemPopularTvBinding binding;
 
-        public MovieViewHolder(@NonNull ItemTopRatedTvBinding binding) {
+        public MovieViewHolder(@NonNull ItemPopularTvBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
