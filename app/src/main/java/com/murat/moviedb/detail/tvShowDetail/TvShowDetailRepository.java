@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.murat.moviedb.data.model.Credits;
+import com.murat.moviedb.data.model.Trailer;
 import com.murat.moviedb.data.model.TvShowDetail;
 import com.murat.moviedb.data.remote.ApiClient;
 
@@ -19,10 +20,12 @@ public class TvShowDetailRepository {
 
     private MediatorLiveData<TvShowDetail> tvShowDetail;
     private MediatorLiveData<Credits> tvShowCredits;
+    private MediatorLiveData<Trailer> trailer;
 
     public TvShowDetailRepository() {
         tvShowDetail = new MediatorLiveData<>();
         tvShowCredits = new MediatorLiveData<>();
+        trailer = new MediatorLiveData<>();
     }
 
     private void requestTvShowDetail(int tvShowId) {
@@ -77,5 +80,30 @@ public class TvShowDetailRepository {
     public MediatorLiveData<Credits> getTvShowCredits(int tvShowId) {
         requestTvShowCredits(tvShowId);
         return tvShowCredits;
+    }
+
+    private void requestTrailer(int tvShowId) {
+        Call<Trailer> call = ApiClient.getApiService().getMovieTrailers(tvShowId);
+        call.enqueue(new Callback<Trailer>() {
+            @Override
+            public void onResponse(Call<Trailer> call, Response<Trailer> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "onResponse successful");
+                    trailer.setValue(response.body());
+                } else {
+                    Log.d(TAG, "onResponse fail: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Trailer> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public MediatorLiveData<Trailer> getTrailer(int tvShowId) {
+        requestTrailer(tvShowId);
+        return trailer;
     }
 }

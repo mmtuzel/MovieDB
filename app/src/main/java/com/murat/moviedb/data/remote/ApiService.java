@@ -3,9 +3,11 @@ package com.murat.moviedb.data.remote;
 import com.murat.moviedb.data.model.Credits;
 import com.murat.moviedb.data.model.MovieDetail;
 import com.murat.moviedb.data.model.MoviesResponse;
+import com.murat.moviedb.data.model.Trailer;
 import com.murat.moviedb.data.model.TvShowDetail;
 import com.murat.moviedb.data.model.TvShowsResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -41,4 +43,10 @@ public interface ApiService {
 
     @GET("tv/{tv_id}/credits")
     Call<Credits> getTvShowCredits(@Path("tv_id") int tvId);
+
+    @GET("movie/{movie_id}/videos")
+    Call<Trailer> getMovieTrailers(@Path("movie_id") int movieId);
+
+    @GET("tv/{tv_id}/videos")
+    Call<Trailer> getTvShowTrailers(@Path("tv_id") int tvId);
 }

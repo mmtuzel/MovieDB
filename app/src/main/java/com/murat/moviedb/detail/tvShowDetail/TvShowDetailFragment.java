@@ -6,19 +6,29 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.murat.moviedb.R;
 import com.murat.moviedb.data.model.Credits;
+import com.murat.moviedb.data.model.Trailer;
 import com.murat.moviedb.data.model.TvShowDetail;
 import com.murat.moviedb.databinding.FragmentTvShowDetailBinding;
 import com.murat.moviedb.detail.CreditsAdapter;
+import com.murat.moviedb.util.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +40,9 @@ public class TvShowDetailFragment extends Fragment {
 
     private FragmentTvShowDetailBinding binding;
     private CreditsAdapter creditsAdapter;
+
+    private YouTubePlayer.OnInitializedListener youtubeInitializedListener;
+    private YouTubePlayerSupportFragment playerFragment;
 
     private int tvShowId;
 
@@ -64,6 +77,18 @@ public class TvShowDetailFragment extends Fragment {
         creditsAdapter = new CreditsAdapter();
         binding.rvTvShowCredits.setAdapter(creditsAdapter);
 
+        // youtube api doesn't support androidX library. warning is negligible
+        // https://stackoverflow.com/a/52695996
+        playerFragment = new YouTubePlayerSupportFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_youtube, playerFragment).commit();
+        //binding.fragmentYoutube.initialize(Constants.API_KEY, youtubeInitializedListener);
+        binding.setIsVideoStarted(false);
+        binding.ivPlay.setOnClickListener(v -> {
+            binding.setIsVideoStarted(true);
+            playerFragment.initialize(Constants.API_KEY, youtubeInitializedListener);
+        });
+
         return binding.getRoot();
     }
 
@@ -78,6 +103,7 @@ public class TvShowDetailFragment extends Fragment {
 
         subscribeTvShowDetail(tvShowDetailViewModel.getTvShowDetail());
         subscribeTvShowCredits(tvShowDetailViewModel.getTvShowCredits());
+        subscribeMovieTrailer(tvShowDetailViewModel.getTrailer());
     }
 
     private void subscribeTvShowDetail(LiveData<TvShowDetail> liveData) {
@@ -94,6 +120,38 @@ public class TvShowDetailFragment extends Fragment {
             @Override
             public void onChanged(Credits credits) {
                 creditsAdapter.setCasts(credits.getCast(), credits.getCrew().get(0));
+            }
+        });
+    }
+
+    private void subscribeMovieTrailer(LiveData<Trailer> liveData) {
+        Log.d(TAG, "subscribeMovieTrailer");
+        liveData.observe(this, new Observer<Trailer>() {
+            @Override
+            public void onChanged(Trailer trailer) {
+                youtubeInitializedListener = new YouTubePlayer.OnInitializedListener() {
+                    @Override
+                    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                        Log.d(TAG, "onInitializationSuccess");
+                        //youTubePlayer.setShowFullscreenButton(false);
+                        youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.MINIMAL);
+                        List<String> playList = new ArrayList<>();
+                        List<Trailer.Result> results = trailer.getResults();
+                        for (Trailer.Result result : results) {
+                            Log.d(TAG, "result: " + result.getSite());
+                            if (result.getSite().equals("YouTube")) {
+                                Log.d(TAG, "key: " + result.getKey());
+                                playList.add(result.getKey());
+                            }
+                        }
+                        youTubePlayer.loadVideos(playList);
+                    }
+
+                    @Override
+                    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                        Log.d(TAG, "onInitializationFailure: " + youTubeInitializationResult.name());
+                    }
+                };
             }
         });
     }

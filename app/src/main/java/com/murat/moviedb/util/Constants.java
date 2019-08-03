@@ -10,4 +10,6 @@ public class Constants {
     public static final int TYPE_TOP_RATED_MOVIE = 0;
     public static final int TYPE_NOW_PLAYING_MOVIE = 1;
     public static final int TYPE_POPULAR_MOVIE = 2;
+
+    public static final String API_KEY = "AIzaSyAZkc3tJY006Reh8ui4a8_PLEp4bnHeFUA";
 }
