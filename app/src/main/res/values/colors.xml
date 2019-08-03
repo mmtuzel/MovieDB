@@ -8,4 +8,6 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="orange">#D6182A</color>
+    <color name="title">#666666</color>
+    <color name="text">#222222</color>
 </resources>

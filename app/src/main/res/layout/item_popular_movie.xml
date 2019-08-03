@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="236dp"
         android:layout_marginEnd="24dp"
         android:onClick="@{() -> callback.onClick(movie)}"
@@ -45,7 +45,7 @@
 
             <ImageView
                 android:id="@+id/iv_movie_poster"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="230dp"
                 android:scaleType="centerCrop"
                 app:mediumImageUrl="@{movie.posterPath}"
@@ -69,7 +69,8 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:textColor="@color/white"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:fontFamily="@font/roboto"
+            android:textSize="12sp"
             android:text="@{movie.releaseDate.substring(0, 4)}"
             app:layout_constraintTop_toTopOf="@id/view_mask"
             app:layout_constraintBottom_toTopOf="@+id/tv_movie_name"
@@ -86,16 +87,17 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:gravity="start"
-            android:textColor="@color/white"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:text="@{movie.title}"
-            app:layout_constraintTop_toBottomOf="@id/tv_movie_year"
-            app:layout_constraintBottom_toBottomOf="@id/card_view"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:textSize="12sp"
             app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/card_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            tools:text="THE MAN IN THE HIGH CASTLE"/>
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_year"
+            tools:text="THE MAN IN THE HIGH CASTLE" />
 
         <View
             android:id="@+id/view_score"

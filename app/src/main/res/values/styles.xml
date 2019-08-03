@@ -17,12 +17,23 @@
     <style name="BottomNavTheme" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/color_selector_bottom_nav</item>
         <item name="itemTextColor">@color/color_selector_bottom_nav</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNav</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNav</item>
+
     </style>
 
     <style name="CustomRatingBarTheme" parent="Widget.AppCompat.RatingBar">
         <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
         <item name="android:minHeight">24dp</item>
         <item name="android:maxHeight">24dp</item>
+    </style>
+
+    <style name="TextAppearance.BottomNav" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.0333333333</item>
     </style>
 
 </resources>
