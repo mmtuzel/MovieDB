@@ -5,13 +5,13 @@ import android.content.Context;
 import com.murat.moviedb.data.local.dao.MovieDao;
 import com.murat.moviedb.data.local.dao.TvDao;
 import com.murat.moviedb.data.model.MovieEntity;
-import com.murat.moviedb.data.model.TvEntity;
+import com.murat.moviedb.data.model.TvShowEntity;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {MovieEntity.class, TvEntity.class}, version = 1)
+@Database(entities = {MovieEntity.class, TvShowEntity.class}, version = 2, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static volatile MovieDatabase INSTANCE;
@@ -28,7 +28,7 @@ public abstract class MovieDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             MovieDatabase.class,
                             "movie_database"
-                    ).build();
+                    ).fallbackToDestructiveMigration().build();
                 }
             }
         }
