@@ -14,11 +14,26 @@ import com.murat.moviedb.databinding.ItemMovieCreditBinding;
 import java.util.List;
 
 public class CreditsAdapter extends RecyclerView.Adapter<CreditsAdapter.CreditViewHolder> {
-    private List<Credits.Cast> casts;
+    private static final int TYPE_DIRECTOR = 0;
+    private static final int TYPE_CAST = 1;
 
-    public void setCasts(List<Credits.Cast> casts) {
+    private List<Credits.Cast> casts;
+    private Credits.Crew director;
+
+    public void setCasts(List<Credits.Cast> casts, Credits.Crew director) {
         this.casts = casts;
+        this.director = director;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return TYPE_DIRECTOR;
+        } else {
+            return TYPE_CAST;
+        }
+        //return super.getItemViewType(position);
     }
 
     @NonNull
@@ -33,13 +48,20 @@ public class CreditsAdapter extends RecyclerView.Adapter<CreditsAdapter.CreditVi
 
     @Override
     public void onBindViewHolder(@NonNull CreditViewHolder holder, int position) {
-        holder.binding.setProfilePath(casts.get(position).getProfilePath());
-        holder.binding.setName(casts.get(position).getName());
+        if (position == 0) {
+            holder.binding.setProfilePath(director.getProfilePath());
+            holder.binding.setName(director.getName());
+            holder.binding.setIsDirector(true);
+        } else {
+            holder.binding.setProfilePath(casts.get(position - 1).getProfilePath());
+            holder.binding.setName(casts.get(position - 1).getName());
+            holder.binding.setIsDirector(false);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return casts == null ? 0 : casts.size();
+        return casts == null ? 0 : casts.size() + 1;
     }
 
     class CreditViewHolder extends RecyclerView.ViewHolder {

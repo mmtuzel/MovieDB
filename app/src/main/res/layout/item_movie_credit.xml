@@ -2,12 +2,16 @@
 <layout>
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="profilePath"
             type="String" />
         <variable
             name="name"
             type="String" />
+        <variable
+            name="isDirector"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:visibility="invisible"
+            android:visibility="@{isDirector ? View.VISIBLE : View.INVISIBLE}"
             android:gravity="start"
             android:textColor="#999999"
             android:textSize="12sp"
