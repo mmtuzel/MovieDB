@@ -22,9 +22,7 @@ import com.murat.moviedb.MainActivity;
 import com.murat.moviedb.R;
 import com.murat.moviedb.data.model.MovieEntity;
 import com.murat.moviedb.databinding.FragmentMoviesBinding;
-import com.murat.moviedb.movies.nowPlaying.NowPlayingMoviesAdapter;
-import com.murat.moviedb.movies.popular.PopularMoviesAdapter;
-import com.murat.moviedb.movies.topRated.TopRatedMoviesAdapter;
+import com.murat.moviedb.util.Constants;
 
 import java.util.List;
 
@@ -36,9 +34,9 @@ public class MoviesFragment extends Fragment {
 
     private FragmentMoviesBinding binding;
 
-    private TopRatedMoviesAdapter topRatedMoviesAdapter;
-    private NowPlayingMoviesAdapter nowPlayingMoviesAdapter;
-    private PopularMoviesAdapter popularMoviesAdapter;
+    private MoviesAdapter topRatedMoviesAdapter;
+    private MoviesAdapter nowPlayingMoviesAdapter;
+    private MoviesAdapter popularMoviesAdapter;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -52,15 +50,15 @@ public class MoviesFragment extends Fragment {
         Log.d(TAG, "onCreateView");
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false);
 
-        topRatedMoviesAdapter = new TopRatedMoviesAdapter(movieClickCallback);
+        topRatedMoviesAdapter = new MoviesAdapter(Constants.TYPE_TOP_RATED_MOVIE, movieClickCallback);
         binding.rvTopRated.setAdapter(topRatedMoviesAdapter);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(binding.rvTopRated);
 
-        nowPlayingMoviesAdapter = new NowPlayingMoviesAdapter(movieClickCallback);
+        nowPlayingMoviesAdapter = new MoviesAdapter(Constants.TYPE_NOW_PLAYING_MOVIE, movieClickCallback);
         binding.rvNowPlaying.setAdapter(nowPlayingMoviesAdapter);
 
-        popularMoviesAdapter = new PopularMoviesAdapter(movieClickCallback);
+        popularMoviesAdapter = new MoviesAdapter(Constants.TYPE_POPULAR_MOVIE, movieClickCallback);
         binding.rvPopular.setAdapter(popularMoviesAdapter);
 
         return binding.getRoot();
