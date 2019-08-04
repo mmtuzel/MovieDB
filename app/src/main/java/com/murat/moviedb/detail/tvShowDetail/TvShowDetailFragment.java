@@ -119,7 +119,11 @@ public class TvShowDetailFragment extends Fragment {
         liveData.observe(this, new Observer<Credits>() {
             @Override
             public void onChanged(Credits credits) {
-                creditsAdapter.setCasts(credits.getCast(), credits.getCrew().get(0));
+                if (credits.getCrew() != null && credits.getCrew().size() > 0) {
+                    creditsAdapter.setCasts(credits.getCast(), credits.getCrew().get(0));
+                } else {
+                    creditsAdapter.setCasts(credits.getCast());
+                }
             }
         });
     }

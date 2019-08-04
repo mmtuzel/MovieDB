@@ -119,8 +119,12 @@ public class MovieDetailFragment extends Fragment {
     private void subscribeMovieCredits(LiveData<Credits> liveData) {
         liveData.observe(this, new Observer<Credits>() {
             @Override
-            public void onChanged(Credits movieCredit) {
-                creditsAdapter.setCasts(movieCredit.getCast(), movieCredit.getCrew().get(0));
+            public void onChanged(Credits credits) {
+                if (credits.getCrew() != null && credits.getCrew().size() > 0) {
+                    creditsAdapter.setCasts(credits.getCast(), credits.getCrew().get(0));
+                } else {
+                    creditsAdapter.setCasts(credits.getCast());
+                }
             }
         });
     }
