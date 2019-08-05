@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWindowBg</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
@@ -15,6 +16,7 @@
     </style>
 
     <style name="BottomNavTheme" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/colorNavigationBg</item>
         <item name="itemIconTint">@color/color_selector_bottom_nav</item>
         <item name="itemTextColor">@color/color_selector_bottom_nav</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNav</item>

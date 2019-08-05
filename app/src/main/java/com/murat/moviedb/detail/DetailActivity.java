@@ -2,7 +2,10 @@ package com.murat.moviedb.detail;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
 
 import com.murat.moviedb.R;
 import com.murat.moviedb.detail.movieDetail.MovieDetailFragment;
@@ -17,6 +20,8 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        setLayoutBehindStatusBar();
+
         String detailType = getIntent().getStringExtra(Constants.DETAIL_TYPE);
         if (detailType.equals(Constants.MOVIE_DETAIL_TYPE)) {
             int detailId = getIntent().getIntExtra(Constants.MOVIE_ID, 0);
@@ -29,5 +34,11 @@ public class DetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, tvShowDetailFragment, MovieDetailFragment.TAG).commit();
         }
+    }
+
+    private void setLayoutBehindStatusBar() {
+        Window window = getWindow();
+        window.setStatusBarColor(Color.TRANSPARENT);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 }
